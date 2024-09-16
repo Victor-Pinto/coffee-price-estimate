@@ -2,7 +2,8 @@ from typing_extensions import List, Dict
 
 import logging
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='info.log', filemode='w', encoding='utf-8', level=logging.DEBUG)
 logger.setLevel(logging.DEBUG)
 logging.debug("test")
 
@@ -61,6 +62,11 @@ def verbosity_debug(msg: str, tl: int = 1,
 def verbosity_warning(msg: str, tl: int = 1,
                    pref: str = '-', prompt: str = '> '):
     logging.warning(f'{pref}{prompt}{msg}')
+
+
+
+def save_logging():
+    pass
         
         
         
