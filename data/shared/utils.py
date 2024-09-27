@@ -1,11 +1,22 @@
 from typing_extensions import List, Dict
 
 import logging
+from colorama import Fore, Style
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(filename='info.log', filemode='w', encoding='utf-8', level=logging.DEBUG)
-logger.setLevel(logging.DEBUG)
-logging.debug("test")
+log_file_path='info.log'
+dic_params = {
+        'level': logging.INFO,
+        'format': "%(asctime)s [%(levelname)s]:\t %(message)s",
+        'datefmt': '%Y-%m-%d %H:%M:%S',
+        'handlers': [logging.StreamHandler(),
+                    logging.FileHandler(log_file_path)]
+        }
+logging.basicConfig(**dic_params)
+
+# logger = logging.getLogger(__name__)
+# logging.basicConfig(filename='info.log', filemode='w', encoding='utf-8', level=logging.DEBUG)
+# logger.setLevel(logging.DEBUG)
+# logging.debug("test")
 
 
 # def verbosity(info: str, verb: bool = True, end: str = '\n'):
@@ -16,32 +27,24 @@ logging.debug("test")
 #     if verb:
 #         print(info, end=end)
 
-def verbosity(msg: str, type: str = 'info', verb: bool = True, tl: int = 1,
-               pref: str = '-', prompt: str = '> '):
+def verbosity(msg: str, verb: bool = True, tl: int = 1,
+               pref: str = '-', prompt: str = '> ',
+               level: str = 'info'):
     '''
     Show logs and save them in log file
-    v2.0.0
+    v2.2.0
     '''
-    
-    pref *= tl
-    
+
     if verb:
-            
-        if type=='info':
-            verbosity_info(msg, tl,
-                pref, prompt)
-            
-        if type=='error':
-            verbosity_error(msg, tl,
-                pref, prompt)
-            
-        if type=='debug':
-            verbosity_debug(msg, tl,
-                pref, prompt)
-            
-        if type=='warning':
-            verbosity_warning(msg, tl,
-                pref, prompt)
+        pref *= tl
+        if level == 'info':
+            logging.info(f'{pref}{prompt}{msg}{Style.RESET_ALL}')
+        elif level == 'error':
+            logging.error(f'{Fore.RED}\033[1m{pref}{prompt}{msg}{Style.RESET_ALL}')
+        elif level == 'success':
+            logging.info(f'{Fore.GREEN}\033[1m{pref}{prompt}{msg}{Style.RESET_ALL}')
+        elif level == 'notif':
+            logging.info(f'{Fore.CYAN}\033[1m{pref}{prompt}{msg}{Style.RESET_ALL}')
 
 
 def verbosity_info(msg: str, tl: int = 1,
