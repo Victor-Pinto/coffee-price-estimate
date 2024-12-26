@@ -190,3 +190,4 @@ temp
 temp.*
 
 info.log
+.~lock.*

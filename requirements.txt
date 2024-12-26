@@ -1,0 +1,17 @@
+# shared modules
+colorama==0.4.6
+pydantic==2.10.3
+ipympl==0.9.5
+
+
+# data treatment and graphics
+openpyxl==3.1.5
+xlsxwriter==3.2.0
+pandas==2.2.3
+matplotlib == 3.10.0
+
+# Linear regression
+seaborn == 0.13.2
+scipy == 1.14.1
+scikit-learn == 1.6.0
+statsmodels == 0.14.4
